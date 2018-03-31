@@ -14,6 +14,18 @@ export default {
 
 	save(data) {
 		return axios.put(SERVICE_ENDPOINT + data._id, data);
+	},
+
+	remove(id) {
+		return axios.delete(SERVICE_ENDPOINT + id);
+	},
+
+	updateTask(id, data) {
+		return axios.put(SERVICE_ENDPOINT + id + '/tasks', data);
+	},
+
+	removeTask(id, data) {
+		return axios.delete(SERVICE_ENDPOINT + id + '/tasks', data);
 	}
 
 };

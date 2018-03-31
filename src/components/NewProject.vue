@@ -1,11 +1,13 @@
 <template>
-	<form class="card mb-4 box-shadow w-50 bg-light p-5" @submit.prevent="create()">
-		<div class="card-body">
-			<h3 class="card-title">Create a new Project</h3>
-			<input type="text" v-model="name" class="form-control my-3" placeholder="Project name" required />
-			<button type="button" class="btn btn-lg btn-block btn-primary">Create Project</button>
-		</div>
-	</form>
+	<div class="col-sm-4">
+		<form class="card mb-4 box-shadow bg-light p-lg-5 p-2" @submit.prevent="create()">
+			<div class="card-body">
+				<h3 class="card-title text-center">Create a new Project</h3>
+				<input type="text" v-model="name" class="form-control my-3" placeholder="Project name" required />
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Create Project</button>
+			</div>
+		</form>
+	</div>
 </template>
 
 <script>
@@ -21,9 +23,11 @@
 		methods: {
 			async create() {
 				try {
-					await project.create(this.name);
+					const { data } = await project.create({ name: this.name });
+					this.$emit('add', data);
+					this.name = '';
 				} catch(err) {
-					console.error('Login Error', err, err.response);
+					console.error('Error:project:create', err, err.response);
 					this.error = err.response && err.response.data && err.response.data.message || err.message;
 				}
 			}

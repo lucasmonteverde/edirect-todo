@@ -2,12 +2,12 @@ import Vue from 'vue';
 import axios from 'axios';
 import router from './router';
 import auth from './services/auth';
-//import * as filters from '@libs/filters';
+import * as filters from './libs/filters';
 import App from './App';
 
-/* Object.keys(filters).forEach(filter => {
+Object.keys(filters).forEach(filter => {
 	Vue.filter(filter, filters[filter]);
-}); */
+});
 
 axios.interceptors.request.use( req => {
 	req.headers['Authorization'] = auth.getAuthHeader();

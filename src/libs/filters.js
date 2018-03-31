@@ -1,12 +1,8 @@
-import './helpers';
-import moment from 'moment';
+import { distanceInWordsToNow } from 'date-fns';
 
-function imagePath(filename) {
-	return require(`@images/${filename}`);
+export function formatDate (date) {
+	return distanceInWordsToNow( new Date(date), {
+		includeSeconds: true,
+		addSuffix: ' ago'
+	});
 }
-
-function formatDate(date, format = 'DD/MM/YYYY [às] H:mm:ss') {
-	return moment(date).format( format );
-}
-
-export { imagePath, formatDate };

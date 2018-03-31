@@ -61,7 +61,7 @@ module.exports = {
 			template: './src/index.html',
 			filename: 'index.html'
 		}),
-		//new ExtractTextPlugin('style.css'),
+		//new ExtractTextPlugin('css/style.css'),
 		new NodemonPlugin({
 			script: 'server.js',
 			watch: ['app','server.js']

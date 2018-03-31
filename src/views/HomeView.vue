@@ -1,12 +1,12 @@
 <template>
 	<main>
 		<Header />
-		<div class="container">
+		<div class="container-fluid">
 			<h1 class="display-4 text-center my-5">Hello view</h1>
 
-			<div class="card-deck mb-3 text-center">
-				<Project v-for="project in projects" :key="project._id" v-bind:project="project" />
-				<NewProject />
+			<div class="row">
+				<Project v-for="project in projects" :key="project._id" v-bind:project="project" v-on:remove="remove" />
+				<NewProject v-on:add="add"/>
 			</div>
 		</div>
 	</main>
@@ -30,6 +30,14 @@
 				projects: []
 			}
 		},
+		methods: {
+			add(project) {
+				this.projects.push(project);
+			},
+			remove(project) {
+				this.projects.splice(this.projects.indexOf(project), 1);
+			}
+		},
 		async created() {
 			const { data } = await project.get();
 
@@ -42,5 +50,4 @@
 
 <style lang="scss">
 	@import '../styles/style';
-
 </style>

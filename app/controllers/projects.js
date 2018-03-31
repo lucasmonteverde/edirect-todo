@@ -27,11 +27,7 @@ router.route('/')
 		
 			const result = await new Model({ ...req.body, owner: req.user.sub }).save();
 
-			res.status(201).json({
-				id: result.id,
-				message: 'created',
-				result
-			});
+			res.status(201).json(result);
 
 		} catch (err ) {
 			next(err);
@@ -70,49 +66,77 @@ router.route('/:id')
 
 				throw err;
 			} else {
-				res.json({
-					id: result._id,
-					message: 'updated',
-					result
-				});
+				res.json(result);
 			}
 			
 		})
+		.catch( err => next(err) );
+	})
+	.delete( (req, res, next) => {
+		Model.findOneAndRemove({
+			_id: req.params.id,
+			owner: req.user.sub
+		})
+		.then( result => res.status(result ? 200 : 404).json(result ? {
+			message: 'deleted'
+		} : 'not found') )
 		.catch( err => next(err) );
 	});
 
 router.route('/:id/tasks')
-	.put( (req, res, next) => {
+	.put( async(req, res, next) => {
 
-		Model.findOne( {
-			_id: req.params.id,
-			owner: req.user.sub
-		})
-		.then( result => {
+		try {
+			const result = await Model.findOne({
+				_id: req.params.id,
+				owner: req.user.sub
+			});
 
 			if ( ! result ) {
 				let err = new Error('not found');
 				err.status = 404;
-
 				throw err;
-			} else {
-
-				if ( req.body.id ) {
-					result.tasks.id(req.body.id).set(req.body);
-				} else {
-					result.tasks.push(req.body);
-				}
-
-				return result.save();
 			}
-			
-		})
-		.then( result => res.json({
-			id: result.id,
-			message: 'updated',
-			result
-		}) )
-		.catch( err => next(err) );
+
+			let task;
+
+			if ( req.body._id ) {
+				task = result.tasks.id(req.body._id).set(req.body);
+			} else {
+				task = result.tasks.create(req.body);
+				result.tasks.push(task);
+			}
+
+			await result.save();
+
+			res.json(task);
+		} catch ( err ) {
+			next(err);
+		}
+	})
+	.delete( async(req, res, next) => {
+		try {
+			const result = await Model.findOne({
+				_id: req.params.id,
+				owner: req.user.sub
+			});
+
+			if ( ! result ) {
+				let err = new Error('not found');
+				err.status = 404;
+				throw err;
+			}
+
+			if ( req.body._id ) {
+				result.tasks.id(req.body._id).remove();
+			}
+
+			await result.save();
+
+			res.json({ message: 'deleted' });
+		} catch ( err ) {
+			next(err);
+		}
 	});
 
 module.exports = router;

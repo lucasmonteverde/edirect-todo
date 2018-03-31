@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 server",
     "dev": "webpack-dev-server --mode development --inline --hot  --content-base build/",
-    "server": "./node_modules/dotenv-cli && nodemon --watch app --watch server.js server.js",
-    "heroku-postbuild": "webpack --mode production"
+    "build": "webpack --mode production",
+    "heroku-postbuild": "npm run build"
   },
   "engines": {
     "node": "~8.x.x"
