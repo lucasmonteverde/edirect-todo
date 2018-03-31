@@ -1,5 +1,3 @@
-'use strict';
-
 const AUTH_MESSAGES = {
 	USER_INATIVE: 'Inactive user',
 	USER_NOT_FOUND: 'User not found',

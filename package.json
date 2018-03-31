@@ -3,13 +3,21 @@
   "version": "0.0.1",
   "author": "Lucas Monteverde",
   "private": true,
+  "scripts": {
+    "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 server",
+    "dev": "webpack-dev-server --mode development --inline --hot  --content-base build/",
+    "server": "./node_modules/dotenv-cli && nodemon --watch app --watch server.js server.js",
+    "heroku-postbuild": "webpack --mode production"
+  },
   "engines": {
     "node": "~8.x.x"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "compression": "^1.7.2",
+    "cors": "^2.8.4",
     "date-fns": "^1.29.0",
     "debug": "^3.1.0",
     "express": "^4.16.3",
@@ -17,14 +25,35 @@
     "express-validator": "^5.1.0",
     "helmet": "^3.12.0",
     "jsonwebtoken": "^8.2.0",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.5",
     "mongoose": "^5.0.12",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "autoprefixer": "^8.2.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^8.0.0-beta",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.2",
-    "gulp-nodemon": "^2.2.1"
+    "eslint": "^4.19.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.1.0",
+    "node-sass": "^4.8.3",
+    "nodemon-webpack-plugin": "^0.1.6",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.7",
+    "vue-loader": "^14.2.2",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
   }
 }

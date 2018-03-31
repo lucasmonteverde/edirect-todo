@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs'),
 	mongoose = require('mongoose'),
 	dbURI = process.env.MONGODB || process.env.MONGODB_URI;

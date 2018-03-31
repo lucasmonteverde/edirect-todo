@@ -1,10 +1,9 @@
-'use strict';
-
 const express = require('express'),
-	logger = require('morgan'),
-	helmet = require('helmet'),
 	compression = require('compression'),
 	bodyParser = require('body-parser'),
+	helmet = require('helmet'),
+	logger = require('morgan'),
+	cors = require('cors'),
 	jwt = require('express-jwt'),
 	pkg = require('./package.json'),
 	fs = require('fs'),
@@ -13,8 +12,9 @@ const express = require('express'),
 require('config/db');
 
 app.use(logger('dev'));
-app.use(helmet());
 app.use(compression());
+app.use(helmet());
+app.use(cors());
 app.use(bodyParser.json());
 
 const options = app.get('env') === 'production' ? {

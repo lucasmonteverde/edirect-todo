@@ -1,5 +1,3 @@
-'use strict';
-
 const router = require('express').Router(),
 	{ check, validationResult } = require('express-validator/check'),
 	JWT = require('jsonwebtoken'),

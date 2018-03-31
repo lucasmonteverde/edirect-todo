@@ -1,5 +1,3 @@
-'use strict';
-
 const router = require('express').Router(),
 	ACL = require('libs/acl'),
 	Model = require('mongoose').model('User');
