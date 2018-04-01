@@ -9,8 +9,9 @@ Object.keys(filters).forEach(filter => {
 	Vue.filter(filter, filters[filter]);
 });
 
+//set authorization headers
 axios.interceptors.request.use( req => {
-	req.headers['Authorization'] = auth.getAuthHeader();
+	if ( auth.loggedIn() ) req.headers['Authorization'] = auth.getAuthHeader();
 	return req;
 }, error => Promise.reject(error) );
 

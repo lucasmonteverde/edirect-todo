@@ -1,5 +1,5 @@
 <template>
-	<li class="task-item" :title="(task.finishedAt || task.createdAt) | formatDate">
+	<li class="task-item" :title="(task.finishedAt || task.createdAt) | formatDate(task.finishedAt ? 'Completed ' : 'Created ' )">
 		<div class="form-check">
 			<input type="checkbox" class="form-check-input" 
 				:id="task._id"

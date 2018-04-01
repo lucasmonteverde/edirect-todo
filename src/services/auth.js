@@ -10,8 +10,6 @@ export default {
 	async login ( auth ) {
 		const { data } = await axios.post(LOGIN_URL, auth);
 
-		console.log('login', data);
-
 		localStorage.setItem('token', data.token);
 
 		return data;
@@ -19,8 +17,6 @@ export default {
 
 	async register ( auth ) {
 		const { data } = await axios.post(REGISTER_URL, auth);
-
-		console.log('register', data);
 
 		localStorage.setItem('token', data.token);
 

@@ -1,7 +1,7 @@
 import { distanceInWordsToNow } from 'date-fns';
 
-export function formatDate (date) {
-	return distanceInWordsToNow( new Date(date), {
+export function formatDate (date, prefix = '') {
+	return prefix + distanceInWordsToNow( new Date(date), {
 		includeSeconds: true,
 		addSuffix: ' ago'
 	});
