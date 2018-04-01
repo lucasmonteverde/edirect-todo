@@ -1,11 +1,11 @@
 <template>
-	<section class="login text-center">
+	<section class="auth text-center">
 		<div class="container">
 			<h1 class="h1 mb-5 font-weight-normal">EDirectInsure TODO List</h1>
 
 			<div class="row">
 				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3">
-					<form class="card form-login" @submit.prevent="submit()">
+					<form class="card" @submit.prevent="submit()">
 
 						<h4 class="h4 font-weight-normal card-header">{{type | capitalize}}</h4>
 
@@ -51,9 +51,9 @@
 						email: this.email,
 						password: this.password
 					});
-					this.$router.replace({ path: this.$route.query.redirect || '/'});
+					this.$router.replace( this.$route.query.redirect || '/');
 				} catch (err) {
-					console.error('Login Error', err, err.response);
+					console.error('Auth Error', err, err.response);
 					this.error = err.response && err.response.data && err.response.data.message || err.message;
 
 					if ( Array.isArray(this.error) ) {
@@ -68,7 +68,7 @@
 <style lang="scss">
 	html, body { height: 100%; }
 
-	.login {
+	.auth {
 		height: 100%;
 		display: flex;
 		align-items: center;

@@ -38,7 +38,7 @@
 		methods: {
 			logout() {
 				auth.logout();
-				this.$router.push('/login');
+				this.$router.push('/auth');
 			},
 			active() {
 				this.isActive = !this.isActive;
