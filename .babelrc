@@ -6,9 +6,5 @@
 				"browsers": ["> 5%", "IE >= 11"]
 			}
 		} ]
-	],
-	"plugins": [
-		"syntax-dynamic-import",
-		"transform-object-rest-spread"
 	]
 }

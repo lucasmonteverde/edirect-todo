@@ -2,17 +2,28 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 require('dotenv').config({ silent: true });
+
+const sassLoader = [
+	MiniCssExtractPlugin.loader,
+	{
+		loader: 'css-loader',
+		options: {
+			minimize: {
+				safe: true
+			}
+		}
+	},
+	'sass-loader'
+];
 
 module.exports = {
 	entry: {
 		app: path.resolve(__dirname, 'src')
 	},
 	output: {
-		path: __dirname + '/dist',
+		path: path.resolve(__dirname, 'dist'),
 		publicPath: '/',
 		filename: 'js/[name].js'
 	},
@@ -27,31 +38,11 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader'
-				}
+				use: 'babel-loader'
 			},
 			{
-				test: /\.css$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader'
-				]
-			},
-			{
-				test: /\.scss$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					{
-						loader: 'css-loader',
-						options: {
-							minimize: {
-								safe: true
-							}
-						}
-					},
-					'sass-loader'
-				]
+				test: /\.s?css$/,
+				use: sassLoader
 			},
 			{
 				test: /\.vue$/,
@@ -59,65 +50,20 @@ module.exports = {
 				options: {
 					loaders: {
 						js: 'babel-loader',
-						scss: [
-							MiniCssExtractPlugin.loader,
-							{
-								loader: 'css-loader',
-								options: {
-									minimize: {
-										safe: true
-									}
-								}
-							},
-							'sass-loader'
-						]
+						scss: sassLoader
 					}
 				}
-			},
-			/* {
-				test: /\.html$/,
-				use: {
-					loader: 'html-loader',
-				}
-			} */
-		]
-	},
-	optimization: {
-		/* runtimeChunk: false,
-		splitChunks: {
-			//minSize: 300000,
-			chunks: 'all'
-		}, */
-		/* splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /\.js$/,
-					name: 'js',
-					chunks: 'all'
-				},
-				css: {
-					name: 'styles',
-					test: /\.(css|sass|scss)$/,
-					chunks: 'all'
-				}
 			}
-		},*/
-		/* minimizer: [
-			new UglifyJsPlugin({
-				cache: true,
-				parallel: true,
-				sourceMap: false
-			}),
-			new OptimizeCSSAssetsPlugin({})
-		] */
+		]
 	},
 	plugins: [
 		new HtmlWebPackPlugin({
 			template: './src/index.html',
+			favicon: './src/assets/favicon.ico',
 			filename: 'index.html'
 		}),
 		new MiniCssExtractPlugin({
-			filename: 'css/style.[hash].css'
+			filename: 'css/style.css'
 		}),
 		new NodemonPlugin({
 			script: 'server.js',
