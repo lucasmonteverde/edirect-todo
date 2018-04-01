@@ -1,5 +1,5 @@
 <template>
-	<main>
+	<section class="home">
 		<Header />
 
 		<div class="container-fluid">
@@ -10,7 +10,7 @@
 				<NewProject v-on:add="add" />
 			</div>
 		</div>
-	</main>
+	</section>
 </template>
 
 <script>

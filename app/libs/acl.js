@@ -1,5 +1,3 @@
-'use strict';
-
 const roles = require('config/roles');
 
 function isAdmin( req, res, next ) {

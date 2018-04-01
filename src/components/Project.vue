@@ -7,16 +7,15 @@
 				<span class="task-remove float-right m-1" @click="edit()">🖊️</span>
 			</div>
 			<div class="card-body" v-if="project.tasks.length">
-				<h4>To Do</h4>
+				<h4 class="h4">To Do</h4>
 				<ul class="list-unstyled mt-3 mb-4">
 					<Task v-for="task in todo" :key="task._id" v-bind:task="task" v-bind:project="project._id" v-on:remove="removeTask" v-on:complete="completeTask" />
 				</ul>
 
-				<h4>Done</h4>
+				<h4 class="h4">Done</h4>
 				<ul class="list-unstyled mt-3 mb-4">
 					<Task v-for="task in done" :key="task._id" v-bind:task="task" v-bind:project="project._id" />
 				</ul>
-				
 			</div>
 			<form class="card-footer" @submit.prevent="addTask()">
 				<div class="input-group">
@@ -25,6 +24,7 @@
 						<button type="submit" class="btn btn-lg btn-primary">Add</button>
 					</div>
 				</div>
+				<p v-if="error" class="text-danger">{{ error }}</p>
 			</form>
 		</div>
 	</div>
@@ -33,8 +33,8 @@
 <script>
 	import Task from '../components/Task';
 
-	import project from '../services/project';
-	import task from '../services/task';
+	import ProjectService from '../services/project';
+	import TaskService from '../services/task';
 
 	export default {
 		components: {
@@ -72,14 +72,14 @@
 
 				try {
 					this.project.name = e.target.innerText;
-					const { data } = await project.save(this.project);
+					const { data } = await ProjectService.save(this.project);
 				} catch(err) {
 					console.error('Error:project:edit', err, err.response);
 				}
 			},
 			async remove() {
 				try {
-					const { data } = await project.remove(this.project._id);
+					const { data } = await ProjectService.remove(this.project._id);
 					this.$emit('remove', this.project);
 				} catch(err) {
 					console.error('Error:project:edit', err, err.response);
@@ -87,7 +87,7 @@
 			},
 			async addTask() {
 				try {
-					const { data } = await task.update(this.project._id, this.task);
+					const { data } = await TaskService.update(this.project._id, this.task);
 					this.project.tasks.push(data);
 					this.task.name = '';
 				} catch(err) {

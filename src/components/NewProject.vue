@@ -5,6 +5,7 @@
 				<h3 class="card-title text-center">Create a new Project</h3>
 				<input type="text" v-model="name" class="form-control my-3" placeholder="Project name" required />
 				<button type="submit" class="btn btn-lg btn-block btn-primary">Create Project</button>
+				<p v-if="error" class="text-danger">{{ error }}</p>
 			</div>
 		</form>
 	</div>

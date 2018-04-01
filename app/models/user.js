@@ -1,5 +1,3 @@
-'use strict';
-
 const mongoose = require('mongoose'),
 	bcrypt = require('bcryptjs'),
 	messages = require('config/messages');

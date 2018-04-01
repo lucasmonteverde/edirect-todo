@@ -1,22 +1,25 @@
 import Vue from 'vue';
-import auth from './services/auth';
 import Router from 'vue-router';
+import auth from './services/auth';
+
+import AuthView from './views/AuthView.vue';
+import HomeView from './views/HomeView.vue';
 
 Vue.use(Router);
 
 const router = new Router({
 	//mode: 'history',
 	routes: [
-		{ name: 'login', path: '/login', component: () => import('./views/LoginView.vue') },
-		{ name: 'home', path: '/', component: () => import('./views/HomeView.vue'), beforeEnter: requireAuth },
-		{ path: '*', redirect: '/login' }
+		{ name: 'auth', path: '/auth', component: AuthView },
+		{ name: 'home', path: '/', component: HomeView, beforeEnter: requireAuth },
+		{ path: '*', redirect: '/auth' }
 	]
 });
 
 function requireAuth(to, from, next) {
 	if ( ! auth.loggedIn() ) {
 		next({
-			path: '/login'
+			path: '/auth'
 		});
 	} else {
 		next();
@@ -25,27 +28,7 @@ function requireAuth(to, from, next) {
 
 export default router;
 
-/* router.beforeEach(async (to, from, next) => {
-	const route = {};
-	const isLogged = await store.dispatch(types.USER_CHECK);
-	const onLogin = to.path === '/login';
-
-	if (isLogged && onLogin)
-		route.path = '/';
-
-	if (!isLogged && !onLogin)
-		route.path = '/login';
-
-	if (!isLogged && !onLogin && to.path !== '/')
-		route.query = {
-			redirect: to.path
-		};
-
-	next(route.path ? route : undefined);
-});
-
-router.beforeEach((to, from, next) => {
-	document.title = to.meta.title + ' - Media Tool';
+/* router.beforeEach((to, from, next) => {
+	document.title = to.meta.title + ' - EDirect - Todo List';
 	next();
-});
- */
+}); */

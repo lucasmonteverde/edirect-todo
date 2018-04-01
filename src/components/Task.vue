@@ -1,5 +1,5 @@
 <template>
-	<li class="task-item" :title="(task.finishedAt || task.createdAt) | formatDate" v-if="!removed">
+	<li class="task-item" :title="(task.finishedAt || task.createdAt) | formatDate">
 		<div class="form-check">
 			<input type="checkbox" class="form-check-input" 
 				:id="task._id"
@@ -16,18 +16,11 @@
 	import TaskService from '../services/task';
 
 	export default {
-		data() {
-			return {
-				error: '',
-				removed: false
-			};
-		},
 		props: ['task', 'project'],
 		methods: {
 			async remove() {
 				try {
 					await TaskService.remove(this.project, this.task._id);
-					//this.removed = true;
 					this.$emit('remove', this.task);
 				} catch(err) {
 					console.error('Error:task:removeTask', err, err.response);
