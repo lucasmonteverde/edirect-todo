@@ -8,7 +8,7 @@ const VALIDATION_MESSAGES = {
 	NAME: 'Name is required',
 	EMAIL: 'Invalid email',
 	PASSWORD: 'Invalid password',
-	EXISTS: 'A user with the given username is already registered'
+	EXISTS: 'A user with the given email is already registered'
 };
 
 module.exports = {

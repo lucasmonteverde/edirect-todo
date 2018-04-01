@@ -9,15 +9,14 @@ const router = new Router({
 	routes: [
 		{ name: 'login', path: '/login', component: () => import('./views/LoginView.vue') },
 		{ name: 'home', path: '/', component: () => import('./views/HomeView.vue'), beforeEnter: requireAuth },
-		{ path: '*', redirect: '/login'}
+		{ path: '*', redirect: '/login' }
 	]
 });
 
 function requireAuth(to, from, next) {
 	if ( ! auth.loggedIn() ) {
 		next({
-			path: '/login',
-			query: { redirect: to.fullPath }
+			path: '/login'
 		});
 	} else {
 		next();

@@ -1,5 +1,5 @@
 <template>
-	<div class="col-sm-4">
+	<div class="col-md-4 col-sm-6">
 		<form class="card mb-4 box-shadow bg-light p-lg-5 p-2" @submit.prevent="create()">
 			<div class="card-body">
 				<h3 class="card-title text-center">Create a new Project</h3>

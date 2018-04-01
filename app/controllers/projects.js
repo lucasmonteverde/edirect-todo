@@ -113,30 +113,29 @@ router.route('/:id/tasks')
 		} catch ( err ) {
 			next(err);
 		}
-	})
-	.delete( async(req, res, next) => {
-		try {
-			const result = await Model.findOne({
-				_id: req.params.id,
-				owner: req.user.sub
-			});
-
-			if ( ! result ) {
-				let err = new Error('not found');
-				err.status = 404;
-				throw err;
-			}
-
-			if ( req.body._id ) {
-				result.tasks.id(req.body._id).remove();
-			}
-
-			await result.save();
-
-			res.json({ message: 'deleted' });
-		} catch ( err ) {
-			next(err);
-		}
 	});
+
+router.route('/:id/tasks/:task').delete( async(req, res, next) => {
+	try {
+		const result = await Model.findOne({
+			_id: req.params.id,
+			owner: req.user.sub
+		});
+
+		if ( ! result ) {
+			let err = new Error('not found');
+			err.status = 404;
+			throw err;
+		}
+
+		result.tasks.id(req.params.task).remove();
+
+		await result.save();
+
+		res.json({ message: 'deleted' });
+	} catch ( err ) {
+		next(err);
+	}
+});
 
 module.exports = router;

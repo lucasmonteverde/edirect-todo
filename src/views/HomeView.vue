@@ -1,12 +1,13 @@
 <template>
 	<main>
 		<Header />
-		<div class="container-fluid">
-			<h1 class="display-4 text-center my-5">Hello view</h1>
 
-			<div class="row">
+		<div class="container-fluid">
+
+			<div class="row my-5">
 				<Project v-for="project in projects" :key="project._id" v-bind:project="project" v-on:remove="remove" />
-				<NewProject v-on:add="add"/>
+				
+				<NewProject v-on:add="add" />
 			</div>
 		</div>
 	</main>
@@ -47,7 +48,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	@import '../styles/style';
-</style>

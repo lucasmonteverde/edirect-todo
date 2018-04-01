@@ -18,14 +18,6 @@ export default {
 
 	remove(id) {
 		return axios.delete(SERVICE_ENDPOINT + id);
-	},
-
-	updateTask(id, data) {
-		return axios.put(SERVICE_ENDPOINT + id + '/tasks', data);
-	},
-
-	removeTask(id, data) {
-		return axios.delete(SERVICE_ENDPOINT + id + '/tasks', data);
 	}
 
 };
