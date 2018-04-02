@@ -47,10 +47,6 @@ router.route('/:id')
 	})
 	.put( (req, res, next) => {
 
-		/*if ( req.body.task ) {
-			_.set(req.body, '$addToSet.tasks', req.body.task);
-		} */
-
 		Model.findOneAndUpdate({
 			_id: req.params.id,
 			owner: req.user.sub
@@ -78,6 +74,7 @@ router.route('/:id')
 			owner: req.user.sub
 		})
 		.then( result => res.status(result ? 200 : 404).json(result ? {
+			status: true,
 			message: 'deleted'
 		} : 'not found') )
 		.catch( err => next(err) );
@@ -132,7 +129,10 @@ router.route('/:id/tasks/:task').delete( async(req, res, next) => {
 
 		await result.save();
 
-		res.json({ message: 'deleted' });
+		res.json({
+			status: true,
+			message: 'deleted'
+		});
 	} catch ( err ) {
 		next(err);
 	}

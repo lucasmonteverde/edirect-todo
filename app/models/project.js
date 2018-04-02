@@ -28,8 +28,7 @@ const schema = new Schema({
 	timestamps: true
 });
 
-/*schema.static('filter', function( request) {
-
+/*schema.static('filter', function(request) {
 	const filter = request.query;
 
 	return this

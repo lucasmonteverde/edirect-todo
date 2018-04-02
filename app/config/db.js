@@ -20,6 +20,7 @@ process.on('SIGINT', () => mongoose.connection.close( () => {
 	process.exit(0);
 }) );
 
+//load all models
 fs.readdirSync('./app/models').forEach( model => require('models/' + model) );
 
 module.exports = mongoose;

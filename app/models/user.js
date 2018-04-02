@@ -24,7 +24,6 @@ const schema = new mongoose.Schema({
 		type: Boolean,
 		default: true
 	},
-	lastLogin: Date,
 	role: {
 		type: String,
 		default: 'user',

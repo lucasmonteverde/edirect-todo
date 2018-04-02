@@ -39,6 +39,7 @@ app.use((req, res, next) => {
 	next();
 });
 
+//load all controllers on router controller name
 fs.readdirSync('./app/controllers').forEach(ctrl => {
 	app.use('/' + ctrl.replace(/\.js|index/g, ''), require('controllers/' + ctrl));
 });
@@ -49,12 +50,13 @@ app.use((req, res, next) => {
 	next(err);
 });
 
-app.use((err, req, res, next) => {  // eslint-disable-line
+app.use((err, req, res, next) => { // eslint-disable-line
 	
 	if ( ! err.status || err.status >= 500 ) {
 		console.error( 'App Error', err.message, err.stack );
 	}
 
+	//express-validation messages formatter
 	if ( err && err.message === 'Validation failed' ) {
 		err.message = err.array().map(item => ({
 			field: item.param,

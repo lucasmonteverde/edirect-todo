@@ -1,7 +1,6 @@
 const router = require('express').Router(),
 	{ check, validationResult } = require('express-validator/check'),
 	JWT = require('jsonwebtoken'),
-	_ = require('lodash'),
 	ACL = require('libs/acl'),
 	messages = require('config/messages'),
 	User = require('mongoose').model('User');
@@ -105,7 +104,7 @@ router.post('/register', [
 
 });
 
-router.post('/refresh', (req, res) => {
+/* router.post('/refresh', (req, res) => {
 
 	const optionKeys = ['iat', 'nbf', 'exp', 'aud', 'iss', 'sub'];
 
@@ -118,7 +117,7 @@ router.post('/refresh', (req, res) => {
 			expiresIn: '7d'
 		})
 	});
-});
+}); */
 
 router.get('/me', (req, res) => res.json(req.user) );
 
