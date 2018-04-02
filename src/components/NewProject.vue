@@ -30,6 +30,10 @@
 				} catch(err) {
 					console.error('Error:project:create', err, err.response);
 					this.error = err.response && err.response.data && err.response.data.message || err.message;
+
+					if ( Array.isArray(this.error) ) {
+						this.error = this.error.map( err => err.message).join(',');
+					}
 				}
 			}
 		}

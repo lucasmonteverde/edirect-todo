@@ -2,7 +2,7 @@
 	<div class="col-md-4 col-sm-6">
 		<div class="card mb-4 box-shadow">
 			<div class="card-header">
-				<h3 class="h3 card-title my-0 font-weight-normal d-inline-block" contentEditable="true" @blur="save" ref="title">{{project.name}}</h3>
+				<h3 class="h3 card-title my-0 font-weight-normal d-inline-block" contentEditable @blur="save" @keydown="keydown" ref="title">{{project.name}}</h3>
 				<span class="task-remove float-right m-1" @click="remove()">🗑️</span>
 				<span class="task-remove float-right m-1" @click="edit()">🖊️</span>
 			</div>
@@ -61,6 +61,12 @@
 			edit() {
 				this.$refs.title.focus();
 			},
+			keydown(e) {
+				if ( e.keyCode == 13 ) {
+					e.preventDefault();
+					this.$refs.title.blur();
+				}
+			},
 			removeTask(task) {
 				this.project.tasks.splice(this.project.tasks.indexOf(task), 1);
 			},
@@ -98,3 +104,7 @@
 		}
 	};
 </script>
+
+<style lang="scss">
+	[contenteditable]:focus{ background: #fff; }
+</style>

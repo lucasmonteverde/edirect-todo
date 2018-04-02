@@ -19,7 +19,7 @@ router.route('/')
 		check('name', messages.validation.NAME)
 			.trim()
 			.escape()
-			.isLength({ min: 2 })
+			.isLength({ min: 1 })
 	], async (req, res, next) => {
 
 		try {
@@ -45,7 +45,12 @@ router.route('/:id')
 		.then( result => res.status(result ? 200 : 404).json(result) )
 		.catch( err => next(err) );
 	})
-	.put( (req, res, next) => {
+	.put( [
+		check('name', messages.validation.NAME)
+			.trim()
+			.escape()
+			.isLength({ min: 1 })
+	], (req, res, next) => {
 
 		Model.findOneAndUpdate({
 			_id: req.params.id,
