@@ -1,5 +1,5 @@
 <template>
-	<section class="home">
+	<main>
 		<Header />
 
 		<div class="container-fluid">
@@ -10,11 +10,14 @@
 				<NewProject v-on:add="add" />
 			</div>
 		</div>
-	</section>
+		
+		<Footer />
+	</main>
 </template>
 
 <script>
 	import Header from '../components/Header';
+	import Footer from '../components/Footer';
 	import Project from '../components/Project';
 	import NewProject from '../components/NewProject';
 
@@ -23,6 +26,7 @@
 	export default {
 		components: {
 			Header,
+			Footer,
 			Project,
 			NewProject
 		},

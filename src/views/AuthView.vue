@@ -1,5 +1,5 @@
 <template>
-	<section class="auth text-center">
+	<section class="auth text-center h-100 d-flex align-items-center bg-light">
 		<div class="container">
 			<h1 class="h1 mb-5 font-weight-normal">EDirectInsure TODO List</h1>
 
@@ -67,11 +67,4 @@
 
 <style lang="scss">
 	html, body { height: 100%; }
-
-	.auth {
-		height: 100%;
-		display: flex;
-		align-items: center;
-		background-color: #f5f5f5;
-	}
 </style>
