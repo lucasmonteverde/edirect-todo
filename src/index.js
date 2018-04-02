@@ -3,6 +3,7 @@ import axios from 'axios';
 import router from './router';
 import auth from './services/auth';
 import * as filters from './libs/filters';
+import './styles/style.scss';
 import App from './App';
 
 Object.keys(filters).forEach(filter => {

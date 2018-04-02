@@ -37,8 +37,8 @@
 			return {
 				type: 'login',
 				name: '',
-				email: 'test@test.com',
-				password: '123456',
+				email: '',
+				password: '',
 				error: ''
 			};
 		},

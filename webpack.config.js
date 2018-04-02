@@ -15,6 +15,7 @@ const sassLoader = [
 			}
 		}
 	},
+	'postcss-loader',
 	'sass-loader'
 ];
 
